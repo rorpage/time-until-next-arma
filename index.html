@@ -47,7 +47,7 @@
         const title = document.getElementById('title');
 
         if (day === 3) {
-          title.innerText = 'TOMORROW IS ARMA NIGHT DAY';
+          title.innerText = 'IT IS ARMA NIGHT DAY EVE';
         } else if (day === 4) {
           title.innerText = 'IT IS ARMA NIGHT DAY';
         } else {
@@ -81,11 +81,14 @@
           let minutesZeroPad = (minutes < 10) ? '0' : '';
           let secondsZeroPad = (seconds < 10) ? '0' : '';
 
-          document.getElementById("countdown").innerHTML = `Squad assembles in ${days}d ${hoursZeroPad}${hours}h ${minutesZeroPad}${minutes}m ${secondsZeroPad}${seconds}s`;
+          const countdownText = `Squad assembles in ${days}d ${hoursZeroPad}${hours}h ${minutesZeroPad}${minutes}m ${secondsZeroPad}${seconds}s`;
+
+          document.getElementById("countdown").innerHTML = countdownText;
 
           if (distance < 0) {
             clearInterval(interval);
-            document.getElementById("countdown").innerHTML = "GAME TIME";
+
+            document.getElementById("countdown").innerHTML = "SQUAD, ASSEMBLE!";
           }
         }, 1000);
       }
