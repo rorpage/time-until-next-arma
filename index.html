@@ -35,13 +35,11 @@
 
     <script>
       window.onload = function() {
-        const nextThursday = nextDay(new Date(), 4);
-
-        isItTheDay(nextThursday);
-        startCountdown(nextThursday);
+        isItTheDay();
+        startCountdown();
       };
 
-      function isItTheDay(nextThursday) {
+      function isItTheDay() {
         const day = new Date().getDay();
 
         const title = document.getElementById('title');
@@ -63,7 +61,9 @@
         return date;
       }
 
-      function startCountdown(nextThursday) {
+      function startCountdown() {
+        const nextThursday = nextDay(new Date(), 4);
+
         nextThursday.setHours(20, 0, 0);
 
         const interval = setInterval(function() {
