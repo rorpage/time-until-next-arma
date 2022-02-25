@@ -51,8 +51,7 @@
         } else if (day === 4) {
           title.innerText = 'IT IS ARMA NIGHT DAY';
         } else {
-          let days = 4 + (7 - day);
-          if (days > 7) days -= 7;
+          const days = (4 + (7 - day)) % 7;
 
           title.innerText = `${days} DAYS UNTIL ARMA NIGHT DAY`;
         }
