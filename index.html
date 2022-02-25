@@ -35,25 +35,16 @@
 
     <script>
       window.onload = function() {
-        isItTheDay();
+        fetch('/api/info')
+          .then(response => response.json())
+          .then(json => {
+            const title = document.getElementById('title');
+
+            title.innerText = json.message;
+          });
+
         startCountdown();
       };
-
-      function isItTheDay() {
-        const day = new Date().getDay();
-
-        const title = document.getElementById('title');
-
-        if (day === 3) {
-          title.innerText = 'IT IS ARMA NIGHT DAY EVE';
-        } else if (day === 4) {
-          title.innerText = 'IT IS ARMA NIGHT DAY';
-        } else {
-          const days = (4 + (7 - day)) % 7;
-
-          title.innerText = `${days} DAYS UNTIL ARMA NIGHT DAY`;
-        }
-      }
 
       function nextDay(date, dayOfTheWeek) {
         date.setDate(date.getDate() + (dayOfTheWeek + (7 - date.getDay())) % 7);
