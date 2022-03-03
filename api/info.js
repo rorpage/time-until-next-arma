@@ -21,7 +21,7 @@ async function calculateResponse() {
   if (day === 3) {
     response.days_until = 1;
     response.message = 'IT IS ARMA NIGHT DAY EVE';
-  } else {
+  } else if (day !== 4) {
     const days = (4 + (7 - day)) % 7;
 
     response.days_until = days;
