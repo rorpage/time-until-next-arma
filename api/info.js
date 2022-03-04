@@ -70,9 +70,14 @@ async function calculateCountdown(response) {
   countdown.seconds = seconds;
   countdown.seconds_display = `${secondsZeroPad}${seconds}s`;
 
-  countdown.countdown_text = (distance < 0) ?
-    'SQUAD, ASSEMBLE!' :
-    `Squad assembles in ${days}d ${hoursZeroPad}${hours}h ${minutesZeroPad}${minutes}m ${secondsZeroPad}${seconds}s`;
+  if (distance < 0) {
+    response.days_until = 0;
+    response.message = 'IT IS ARMA NIGHT DAY';
+
+    countdown.countdown_text = 'SQUAD, ASSEMBLE!';
+  } else {
+    countdown.countdown_text = `Squad assembles in ${days}d ${hoursZeroPad}${hours}h ${minutesZeroPad}${minutes}m ${secondsZeroPad}${seconds}s`;
+  }
 
   response.countdown = countdown;
 
