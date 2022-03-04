@@ -5,7 +5,8 @@ async function handler(req, resp) {
     'Origin, X-Requested-With, Content-Type, Accept'
   );
 
-  const response = calculateResponse();
+  let response = calculateResponse();
+  calculateCountdown(response);
 
   resp.json(response);
 }
@@ -30,8 +31,6 @@ function calculateResponse() {
     response.days_until = days;
     response.message = `${days} DAYS UNTIL ARMA NIGHT DAY`;
   }
-
-  calculateCountdown(response);
 
   return response;
 }
