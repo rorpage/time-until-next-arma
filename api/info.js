@@ -18,7 +18,10 @@ async function calculateResponse() {
 
   const day = new Date().getDay();
 
-  if (day === 3) {
+  if (day === 4) {
+    response.days_until = 0;
+    response.message = 'IT IS ARMA NIGHT DAY';
+  } else if (day === 3) {
     response.days_until = 1;
     response.message = 'IT IS ARMA NIGHT DAY EVE';
   } else if (day !== 4) {
