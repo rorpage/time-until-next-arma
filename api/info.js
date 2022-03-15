@@ -1,23 +1,33 @@
+const axios = require('axios').default;
+
 async function handler(req, resp) {
+  const weatherApiKey = process.env.OPENSKY_API_KEY || '';
+  let response = {};
+
+  await axios.get(
+    `https://api.openweathermap.org/data/2.5/weather?lat=39.7707286&lon=-86.0703977&appid=${weatherApiKey}&units=imperial`
+  )
+  .then((json) => {
+    let utc_offset = json.data.timezone / 3600;
+    const client_date = new Date();
+    const utc = client_date.getTime() + client_date.getTimezoneOffset() * 60000;
+    const server_date = new Date(utc + 3600000 * utc_offset);
+
+    calculateResponse(server_date, response);
+    calculateCountdown(server_date, response);
+  });
+
   resp.setHeader('Access-Control-Allow-Origin', '*');
   resp.setHeader(
     'Access-Control-Allow-Headers',
     'Origin, X-Requested-With, Content-Type, Accept'
   );
 
-  let response = calculateResponse();
-  calculateCountdown(response);
-
   resp.json(response);
 }
 
-function calculateResponse() {
-  let response = {
-    days_until: 0,
-    message: 'IT IS ARMA NIGHT DAY'
-  };
-
-  const day = new Date().getDay();
+function calculateResponse(today, response) {
+  const day = today.getDay();
 
   if (day === 4) {
     response.days_until = 0;
@@ -41,16 +51,15 @@ function nextDay(date, dayOfTheWeek) {
   return date;
 }
 
-async function calculateCountdown(response) {
+async function calculateCountdown(today, response) {
   let countdown = {};
 
-  const nextThursday = nextDay(new Date(), 4);
+  const copyOfToday = new Date(today.getTime());
 
+  let nextThursday = nextDay(today, 4);
   nextThursday.setHours(20, 0, 0);
 
-  const now = new Date().getTime();
-
-  const distance = nextThursday - now;
+  const distance = nextThursday - (copyOfToday.getTime());
 
   const days = Math.floor(distance / (1000 * 60 * 60 * 24));
   const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -69,14 +78,9 @@ async function calculateCountdown(response) {
   countdown.seconds = seconds;
   countdown.seconds_display = `${secondsZeroPad}${seconds}s`;
 
-  if (distance < 0) {
-    response.days_until = 0;
-    response.message = 'IT IS ARMA NIGHT DAY';
-
-    countdown.countdown_text = 'SQUAD, ASSEMBLE!';
-  } else {
-    countdown.countdown_text = `Squad assembles in ${days}d ${hoursZeroPad}${hours}h ${minutesZeroPad}${minutes}m ${secondsZeroPad}${seconds}s`;
-  }
+  countdown.countdown_text = (distance < 0)
+    ? 'SQUAD, ASSEMBLE!'
+    : `Squad assembles in ${days}d ${hoursZeroPad}${hours}h ${minutesZeroPad}${minutes}m ${secondsZeroPad}${seconds}s`;
 
   response.countdown = countdown;
 
