@@ -148,7 +148,8 @@ const quotes = [
   'Yeah... I don\'t know. Maybe I\'m asking too much... But I feel like if you are billing at $150 an hour, you should know how to set an environment variable.',
   'Nolan, I\'ve been giving you favors my whole life.',
   'I can put a 1k sound system in a 2001 Honda Civic and would call it a budget car. That\'s my logic.',
-  'People tend to be unhappy with me but I\'m still around...'
+  'People tend to be unhappy with me but I\'m still around...',
+  'Ed, there\'s a new princess in town, and it\'s me!'
 ];
 
 export default handler;
