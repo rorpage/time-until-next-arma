@@ -89,10 +89,66 @@ async function calculateCountdown(today, response) {
 }
 
 function addQuote(response) {
-  const text = 'Printers are for artists and the elderly.';
-  response.quote = `"${text}" - Clay Taylor`;
+  const index = Math.floor(Math.random() * quotes.length);
+  const randomQuote = quotes[index];
+
+  response.quote = `"${randomQuote}" - Clay Taylor`;
 
   return response;
 }
+
+const quotes = [
+  'Tiger Woods is the greatest athlete of all time.',
+  'Printers are for artists and the elderly.',
+  'Dark Age is the best book ever written.',
+  'You have to be crazy when racing bikes...otherwise you finish in the back.',
+  'Jimmy John\'s...No. If I wanted lunch meat and bread I\'d just go home.',
+  'Shooting a basketball is like riding a bike, Ben.',
+  'I\'ve got heavy feet.',
+  'Half of success in this world is being seen.',
+  'Some may say I don\'t take the straightest path there.',
+  'I inherently disagree with spreadsheets.',
+  'I love ammo factories.',
+  'That\'s a big nope fish, Ben.',
+  'You\'ve got to have one crappy cup of coffee a week to keep you grounded.',
+  'If you don\'t understand software get out.',
+  'With enough NOS you can do anything.',
+  'I hope this fails, \'cause then I\'ll be right!',
+  'This is a midwestern thing. People just read things and think they are right. People say Reese Pieces all the time, and it\'s so wrong.',
+  'I do not use hand screw drivers.',
+  'Also for the record. I don\'t like the term DIY...',
+  'Centergrove is the Carmel of the southside, but if it was on the Northside it would be Sheridan.',
+  'Manual labor is not that hard, it just takes time.',
+  'I use words like always and never a lot.',
+  'If you told me to go out there and get second to last place, I couldn\'t do it.',
+  'I actually like to lose, because it means you\'ve accomplished something.',
+  'I\'d lick a toilet seat for $175,000 a year.',
+  'I\'m done with caring about strength.',
+  'Traversing space is a waste of time and harmful.',
+  'With regards to 24hrs a day I\'m pretty snowflakey.',
+  'Hmm... Just typing sports didn\'t make it work...',
+  'It\'s sugar. It doesn\'t matter. All sugar is created equal.',
+  'I tend to do better in person at connecting with and wooing individuals.',
+  'When in doubt, press the plus button on anything.',
+  'If I can sit up here and make decisions all day that make you hate me, I\'ll do that.',
+  'I don\'t have time for incompetence.',
+  'I\'m a humble man...but I also know that I am an attractive man.',
+  'My only issue with these public pools is they don\'t allow alcohol.',
+  'This is all I want, to be voted into some secret club!',
+  'Walking is for high schoolers.',
+  'I think everything is a man.',
+  'Tuesdays are great days... because it\'s not Monday... but it\'s not Wednesday',
+  'I\'m an excuse...',
+  'I\'m a very oily person...',
+  'Welp...taste and smell already back. Maybe I never lost it.',
+  'Driving things are all guidelines... (while cutting through a gas station)',
+  'If there\'s one thing I don\'t want, it\'s my guac to be squeezed.',
+  'I will hustle so much for commission.',
+  'I need a circular plate, so I can attack it from all angles.',
+  'Yeah... I don\'t know. Maybe I\'m asking too much... But I feel like if you are billing at $150 an hour, you should know how to set an environment variable.',
+  'Nolan, I\'ve been giving you favors my whole life.',
+  'I can put a 1k sound system in a 2001 Honda Civic and would call it a budget car. That\'s my logic.',
+  'People tend to be unhappy with me but I\'m still around...'
+];
 
 export default handler;
