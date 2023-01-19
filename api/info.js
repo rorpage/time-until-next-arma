@@ -15,6 +15,7 @@ async function handler(req, resp) {
 
     calculateResponse(server_date, response);
     calculateCountdown(server_date, response);
+    addQuote(response);
   });
 
   resp.setHeader('Access-Control-Allow-Origin', '*');
@@ -83,6 +84,13 @@ async function calculateCountdown(today, response) {
     : `Squad assembles in ${days}d ${hoursZeroPad}${hours}h ${minutesZeroPad}${minutes}m ${secondsZeroPad}${seconds}s`;
 
   response.countdown = countdown;
+
+  return response;
+}
+
+function addQuote(response) {
+  const text = 'Printers are for artists and the elderly.';
+  response.quote = `"${text}" - Clay Taylor`;
 
   return response;
 }

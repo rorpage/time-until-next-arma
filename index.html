@@ -19,7 +19,7 @@
         font-family: 'Roboto', sans-serif;
       }
 
-      #countdown {
+      h2 {
         font-family: 'Roboto Mono', sans-serif;
       }
 
@@ -32,15 +32,15 @@
   <body>
     <h1 id="title" class="big"></h1>
     <h2 id="countdown"></h2>
+    <h2 id="quote"></h2>
 
     <script>
       window.onload = function() {
         fetch('/api/info')
           .then(response => response.json())
           .then(json => {
-            const title = document.getElementById('title');
-
-            title.innerText = json.message;
+            document.getElementById('quote').innerText = json.quote;
+            document.getElementById('title').innerText = json.message;
           });
 
         startCountdown();
