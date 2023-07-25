@@ -51,7 +51,7 @@
           .then(response => response.json())
           .then(json => {
             document.getElementById('title').innerText = json.message;
-            document.getElementById('eight-pm-in').innerText = `It is currently Arma night day time in ${json.eight_pm_in}.`;
+            document.getElementById('eight-pm-in').innerText = json.eight_pm_in;
             document.getElementById('quote').innerText = json.quote;
           });
 
