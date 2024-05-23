@@ -36,15 +36,15 @@ function calculateResponse(today, response) {
 
   if (day === 4) {
     response.days_until = 0;
-    response.message = 'IT IS ARMA OR POTENTIALLY ICARUS NIGHT DAY';
+    response.message = 'IT IS ARMA NIGHT DAY BUT NOW VALHEIM';
   } else if (day === 3) {
     response.days_until = 1;
-    response.message = 'IT IS ARMA OR POTENTIALLY ICARUS NIGHT DAY EVE';
+    response.message = 'IT IS ARMA BUT NOW VALHEIM NIGHT DAY EVE';
   } else if (day !== 4) {
     const days = (4 + (7 - day)) % 7;
 
     response.days_until = days;
-    response.message = `${days} DAYS UNTIL ARMA OR POTENTIALLY ICARUS NIGHT DAY`;
+    response.message = `${days} DAYS UNTIL ARMA BUT NOW VALHEIM NIGHT DAY`;
   }
 
   return response;
@@ -85,8 +85,8 @@ async function calculateCountdown(today, utc_offset, response) {
   countdown.seconds_display = `${secondsZeroPad}${seconds}s`;
 
   countdown.countdown_text = (distance < 0)
-    ? 'SQUAD, ASSEMBLE!'
-    : `Squad assembles in ${days}d ${hoursZeroPad}${hours}h ${minutesZeroPad}${minutes}m ${secondsZeroPad}${seconds}s`;
+    ? 'TIME TO PILLAGE AND SAIL!'
+    : `Vikings assemble in ${days}d ${hoursZeroPad}${hours}h ${minutesZeroPad}${minutes}m ${secondsZeroPad}${seconds}s`;
 
   response.countdown = countdown;
 
@@ -94,7 +94,7 @@ async function calculateCountdown(today, utc_offset, response) {
     const index = (distance < 0) ? 0 : hours + (utc_offset + 1);
     const location = cities[index].location;
 
-    response.eight_pm_in = `It is currently Arma or potentially Icarus night day time in ${location}.`
+    response.eight_pm_in = `It is currently Arma but now Valheim night day time in ${location}.`
   }
 
   return response;
