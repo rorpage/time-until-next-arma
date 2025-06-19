@@ -83,15 +83,15 @@
           let minutesZeroPad = (minutes < 10) ? '0' : '';
           let secondsZeroPad = (seconds < 10) ? '0' : '';
 
-          const countdownText = `Yak about yaks in ${days}d ${hoursZeroPad}${hours}h ${minutesZeroPad}${minutes}m ${secondsZeroPad}${seconds}s`;
+          const countdownText = `Squad assembles in ${days}d ${hoursZeroPad}${hours}h ${minutesZeroPad}${minutes}m ${secondsZeroPad}${seconds}s`;
 
           document.getElementById("countdown").innerHTML = countdownText;
 
           if (distance < 0) {
             clearInterval(interval);
 
-            document.getElementById('title').innerHTML = 'IT IS ARMA NIGHT DAY BUT NOW ENSHROUDED';
-            document.getElementById("countdown").innerHTML = 'TIME TO SOAR OVER THE SHROUD!';
+            document.getElementById('title').innerHTML = 'IT IS ARMA NIGHT DAY';
+            document.getElementById("countdown").innerHTML = 'SQUAD, ASSEMBLE!';
           }
         }, 1000);
       }
