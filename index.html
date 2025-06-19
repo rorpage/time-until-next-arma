@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#0080ff" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,22 +29,24 @@
         font-size: 10pt;
       }
 
-      h2 {
-        font-family: 'Roboto Mono', sans-serif;
-      }
-
       #quote {
         bottom: 0;
         position: absolute;
       }
+
+      .text {
+        font-family: 'Roboto Mono', sans-serif;
+        padding-bottom: 16px;
+        padding-top: 16px;
+      }
     </style>
   </head>
   <body>
-    <h1 id="title" class="big"></h1>
+    <div id="title" class="big"></div>
     <img src="images/btta.png" alt="Back to the Arma" />
-    <h2 id="countdown"></h2>
-    <h2 id="eight-pm-in"></h2>
-    <h2 id="quote"></h2>
+    <div class="text" id="countdown"></div>
+    <div class="text" id="eight-pm-in"></div>
+    <div class="text" id="quote"></div>
 
     <script>
       window.onload = function() {
