@@ -1,4 +1,4 @@
-const axios = require('axios').default;
+import axios from 'axios';
 
 async function handler(_req, resp) {
   const weatherApiKey = process.env.OPENSKY_API_KEY || '';
