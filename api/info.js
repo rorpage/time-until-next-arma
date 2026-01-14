@@ -1,9 +1,11 @@
-const axios = require('axios').default;
+import axios from 'axios';
 
 async function handler(_req, resp) {
   const weatherApiKey = process.env.OPENSKY_API_KEY || '';
 
-  let response = {};
+  let response = {
+    eight_pm_in: ''
+  };
 
   await axios.get(
     `https://api.openweathermap.org/data/2.5/weather?lat=39.7707286&lon=-86.0703977&appid=${weatherApiKey}&units=imperial`
@@ -16,7 +18,7 @@ async function handler(_req, resp) {
     const server_date = new Date(utc + 3600000 * utc_offset);
 
     calculateResponse(server_date, response);
-    calculateCountdown(server_date, response);
+    calculateCountdown(server_date, utc_offset, response);
     addQuote(response);
   });
 
@@ -54,7 +56,8 @@ function nextDay(date, dayOfTheWeek) {
   return date;
 }
 
-async function calculateCountdown(today, response) {
+async function calculateCountdown(today, utc_offset, response) {
+  const dayOfTheWeek = today.getDay();
   let countdown = {};
 
   const copyOfToday = new Date(today.getTime());
@@ -87,71 +90,11 @@ async function calculateCountdown(today, response) {
 
   response.countdown = countdown;
 
-  response.eight_pm_in = null;
+  if (dayOfTheWeek === 4) {
+    const index = (distance < 0) ? 0 : hours + (utc_offset + 1);
+    const location = cities[index].location;
 
-  if (today.getDay() === 4) {
-    let city = '';
-
-    if (distance < 0) {
-      // GMT -4
-      city = 'Indianapolis, Indiana, USA';
-    } else if (hours === 0) {
-      // GMT -3
-      city = 'Buenos Aires, Argentina';
-    } else if (hours === 1) {
-      // GMT -2
-      city = 'Grytviken, South Georgia';
-    } else if (hours === 2) {
-      // GMT -1
-      city = 'Ponta Delgada, Portugal';
-    } else if (hours === 3) {
-      // GMT 0
-      city = 'Casablanca, Morocco';
-    } else if (hours === 4) {
-      // GMT 1
-      city = 'Oslo, Norway';
-    } else if (hours === 5) {
-      // GMT 2
-      city = 'Athens, Greece';
-    } else if (hours === 6) {
-      // GMT 3
-      city = 'Doha, Qatar';
-    } else if (hours === 7) {
-      // GMT 4
-      city = 'Saratov, Russia';
-    } else if (hours === 8) {
-      // GMT 5
-      city = 'Karachi, Pakistan';
-    } else if (hours === 9) {
-      // GMT 6
-      city = 'Dhaka, Bangladesh';
-    } else if (hours === 10) {
-      // GMT 7
-      city = 'Jakarta, Indonesia';
-    } else if (hours === 11) {
-      // GMT 8
-      city = 'Shanghai, China';
-    } else if (hours === 12) {
-      // GMT 9
-      city = 'Tokyo, Japan';
-    } else if (hours === 13) {
-      // GMT 10
-      city = 'Melbourne, Australia';
-    } else if (hours === 14) {
-      // GMT 11
-      city = 'Luganville, Vanuatu';
-    } else if (hours === 15) {
-      // GMT 12
-      city = 'Toga Village, Tuvalu';
-    } else if (hours === 16) {
-      // GMT 13
-      city = 'Lapaha, Tonga';
-    } else if (hours === 17) {
-      // GMT 14
-      city = 'Tarawa, Kiribati';
-    }
-
-    response.eight_pm_in = city;
+    response.eight_pm_in = `It is currently Arma night day time in ${location}.`
   }
 
   return response;
@@ -222,7 +165,25 @@ const quotes = [
 ];
 
 const cities = [
-  { tz_offset: 0, location: '' }
+  { tz_offset: -4, location: 'Indianapolis, IN, USA' },
+  { tz_offset: -3, location: 'Buenos Aires, Argentina' },
+  { tz_offset: -2, location: 'Grytviken, South Georgia' },
+  { tz_offset: -1, location: 'Ponta Delgada, Portugal' },
+  { tz_offset: 0, location: 'Casablanca, Morocco' },
+  { tz_offset: 1, location: 'Oslo, Norway' },
+  { tz_offset: 2, location: 'Athens, Greece' },
+  { tz_offset: 3, location: 'Doha, Qatar' },
+  { tz_offset: 4, location: 'Saratov, Russia' },
+  { tz_offset: 5, location: 'Karachi, Pakistan' },
+  { tz_offset: 6, location: 'Dhaka, Bangladesh' },
+  { tz_offset: 7, location: 'Jakarta, Indonesia' },
+  { tz_offset: 8, location: 'Shanghai, China' },
+  { tz_offset: 9, location: 'Tokyo, Japan' },
+  { tz_offset: 10, location: 'Melbourne, Australia' },
+  { tz_offset: 11, location: 'Luganville, Vanuatu' },
+  { tz_offset: 12, location: 'Toga Village, Tuvalu' },
+  { tz_offset: 13, location: 'Lapaha, Tonga' },
+  { tz_offset: 14, location: 'Tarawa, Kiribati' }
 ];
 
 export default handler;

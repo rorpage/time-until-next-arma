@@ -2,13 +2,13 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#0080ff" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
-    <title>Arma</title>
+    <title>Arma - formally known as Arma, Icarus, Valheim, and Enshrouded</title>
     <style>
       .big {
         font-size: 72pt;
@@ -29,21 +29,24 @@
         font-size: 10pt;
       }
 
-      h2 {
-        font-family: 'Roboto Mono', sans-serif;
-      }
-
       #quote {
         bottom: 0;
-        position: relative;
+        position: absolute;
+      }
+
+      .text {
+        font-family: 'Roboto Mono', sans-serif;
+        padding-bottom: 16px;
+        padding-top: 16px;
       }
     </style>
   </head>
   <body>
-    <h1 id="title" class="big"></h1>
-    <h2 id="countdown"></h2>
-    <h2 id="eight-pm-in"></h2>
-    <h2 id="quote"></h2>
+    <div id="title" class="big"></div>
+    <img src="images/btta.png" alt="Back to the Arma" />
+    <div class="text" id="countdown"></div>
+    <div class="text" id="eight-pm-in"></div>
+    <div class="text" id="quote"></div>
 
     <script>
       window.onload = function() {
@@ -51,7 +54,7 @@
           .then(response => response.json())
           .then(json => {
             document.getElementById('title').innerText = json.message;
-            document.getElementById('eight-pm-in').innerText = `It is currently Arma night day time in ${json.eight_pm_in}.`;
+            document.getElementById('eight-pm-in').innerText = json.eight_pm_in;
             document.getElementById('quote').innerText = json.quote;
           });
 
