@@ -163,6 +163,7 @@ const quotes = [
   'People tend to be unhappy with me but I\'m still around...',
   'Ed, there\'s a new princess in town, and it\'s me!',
   'I feel sufficiently grabbed.',
+  'Bacon is over-rated.'
 ];
 
 const cities = [
